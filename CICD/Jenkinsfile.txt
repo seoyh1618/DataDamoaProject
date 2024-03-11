@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    
+    stages {
+        
+        stage('github-clone') {
+            steps {
+                git branch: 'BE', credentialsId: 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', url: 'https://github.com/seoyh1618/DataDamoaProject'
+            }
+        }
+        
+   		// stage...
+   	}
+}
