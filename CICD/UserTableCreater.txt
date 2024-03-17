@@ -1,0 +1,23 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+SELECT * FROM pg_extension;
+
+CREATE TYPE gender AS ENUM('Male', 'Female', 'Other');
+CREATE TABLE "User" (
+	"id" UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+	"username" VARCHAR(20) UNIQUE NOT NULL,
+	"email" VARCHAR(255) UNIQUE NOT NULL,
+	CONSTRAINT email_check_format CHECK (email ~* '^[A-Za-z0-9.-%]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
+	"isEmailVerify" BOOLEAN DEFAULT FALSE,
+	"createDate" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"expiredDate" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP + INTERVAL '1 month',
+	"updateDate" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"crawlExecuteCount" INTEGER DEFAULT 0,
+	"loginToken" VARCHAR(255),
+	"resetPasswordToken" VARCHAR(255),
+	"liveStatus" BOOLEAN NOT NULL DEFAULT FALSE,
+	"dateOfBirth" DATE,
+	"gender" gender,
+	"profileName" VARCHAR(50) UNIQUE NOT NULL
+);
+
+INSERT INTO "User" ("username", "email", "dateOfBirth", "gender", "profileName") VALUES ('testUser', 'testuser@example.com', '1990-01-01', 'Male', 'TestProfileName');
