@@ -49,6 +49,8 @@ public class UserControllerTest {
 		signupRequestDTO.setEmail("test1234@gmail.com");
 		signupRequestDTO.setEmailVerify(false);
 		
+		
+		
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(1998, 9, 9);
 		signupRequestDTO.setDateOfBirth(calendar.getTime());
