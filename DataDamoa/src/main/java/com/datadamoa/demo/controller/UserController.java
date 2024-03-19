@@ -40,9 +40,6 @@ public class UserController {
 	 * */
 	@PostMapping("/signup")
 	public ResponseEntity<String> SignupUser(@RequestBody @Valid SignupRequestDTO signupRequestDTO,BindingResult bindingResult){
-
-		System.out.println("asdaskhdbkasbdkas");
-		
 		if(bindingResult.hasErrors()) {
 			List<String> errors = bindingResult.getAllErrors()
 					.stream()
